@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ItemMenu">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.burgerplanet.model.OrderViewModel" />
+
+        <variable
+            name="itemFragment"
+            type="com.example.burgerplanet.MenuFragment" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <RadioGroup
+                android:id="@+id/item_options"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RadioButton
+                    android:id="@+id/vegBurger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.item.equals(@string/vegBurger)}"
+                    android:onClick="@{() -> viewModel.setMenu(@string/vegBurger)}"
+                    android:text="@string/vegBurger" />
+
+                <RadioButton
+                    android:id="@+id/cheeseBurger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.item.equals(@string/cheeseBurger)}"
+                    android:onClick="@{() -> viewModel.setMenu(@string/cheeseBurger)}"
+                    android:text="@string/cheeseBurger" />
+
+                <RadioButton
+                    android:id="@+id/doubelPatty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.item.equals(@string/doublePatty)}"
+                    android:onClick="@{() -> viewModel.setMenu(@string/doublePatty)}"
+                    android:text="@string/doublePatty" />
+
+                <RadioButton
+                    android:id="@+id/pannerKing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.item.equals(@string/paneerKing)}"
+                    android:onClick="@{() -> viewModel.setMenu(@string/paneerKing)}"
+                    android:text="@string/paneerKing" />
+
+                <RadioButton
+                    android:id="@+id/planetSpecial"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.item.equals(@string/planetSpecial)}"
+                    android:onClick="@{() -> viewModel.setMenu(@string/planetSpecial)}"
+                    android:text="@string/planetSpecial" />
+            </RadioGroup>
+
+            <View
+                android:id="@+id/divider"
+                style="@style/Widget.BurgerPlanet.Divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/side_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_options" />
+
+            <TextView
+                android:id="@+id/subtotal"
+                style="@style/Widget.BurgerPlanet.TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/side_margin"
+                android:text="@{@string/subtotal_price(viewModel.price)}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider"
+                tools:text="Subtotal $5.00" />
+
+            <Button
+                android:id="@+id/cancel_button"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/side_margin"
+                android:onClick="@{() -> itemFragment.cancelOrder()}"
+                android:text="@string/cancel"
+                app:layout_constraintEnd_toStartOf="@id/next_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/next_button" />
+
+            <Button
+                android:id="@+id/next_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/side_margin"
+                android:onClick="@{() -> itemFragment.goToNextScreen()}"
+                android:text="@string/next"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/cancel_button"
+                app:layout_constraintTop_toBottomOf="@id/subtotal" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
